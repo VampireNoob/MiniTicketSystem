@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Ticketsystem</title>
+</head>
+<body>
+    <h1>Alle Tickets</h1>
+    <a th:href="@{/tickets/new}">Neues Ticket erstellen</a>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titel</th>
+            <th>Priorität</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.id}">1</td>
+            <td th:text="${ticket.title}">Titel</td>
+            <td th:text="${ticket.priority}">HOCH</td>
+            <td th:text="${ticket.status}">OFFEN</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

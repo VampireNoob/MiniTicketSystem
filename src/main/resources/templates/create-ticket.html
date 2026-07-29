@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Neues Ticket erstellen</title>
+</head>
+<body>
+    <h1>Neues Ticket erstellen</h1>
+
+    <form th:action="@{/tickets/new}" method="post">
+        <label>
+            Titel:
+            <input type="text" name="title" required>
+        </label>
+        <br><br>
+
+        <label>
+            Beschreibung:
+            <textarea name="description" rows="4" cols="40"></textarea>
+        </label>
+        <br><br>
+
+        <label>
+            Priorität:
+            <select name="priority">
+                <option value="NIEDRIG">Niedrig</option>
+                <option value="MITTEL">Mittel</option>
+                <option value="HOCH">Hoch</option>
+            </select>
+        </label>
+        <br><br>
+
+        <button type="submit">Ticket erstellen</button>
+    </form>
+
+    <br>
+    <a th:href="@{/}">Zurück zur Übersicht</a>
+</body>
+</html>
