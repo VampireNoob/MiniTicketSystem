@@ -3,37 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Neues Ticket erstellen</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-    <h1>Neues Ticket erstellen</h1>
+    <div class="page-header">
+        <div>
+            <h1>Neues Ticket erstellen</h1>
+            <a th:href="@{/}">← Zurück zur Übersicht</a>
+        </div>
+        <button id="theme-toggle">Dark Mode</button>
+    </div>
 
-    <form th:action="@{/tickets/new}" method="post">
+    <form class="ticket-form" th:action="@{/tickets/new}" method="post">
         <label>
-            Titel:
+            Titel
             <input type="text" name="title" required>
         </label>
-        <br><br>
 
         <label>
-            Beschreibung:
-            <textarea name="description" rows="4" cols="40"></textarea>
+            Beschreibung
+            <textarea name="description" rows="4"></textarea>
         </label>
-        <br><br>
 
         <label>
-            Priorität:
+            Priorität
             <select name="priority">
                 <option value="NIEDRIG">Niedrig</option>
                 <option value="MITTEL">Mittel</option>
                 <option value="HOCH">Hoch</option>
             </select>
         </label>
-        <br><br>
 
-        <button type="submit">Ticket erstellen</button>
+        <button type="submit" class="btn-primary">Ticket erstellen</button>
     </form>
 
-    <br>
-    <a th:href="@{/}">Zurück zur Übersicht</a>
+    <script th:src="@{/js/theme.js}"></script>
 </body>
 </html>

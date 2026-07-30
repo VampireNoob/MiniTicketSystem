@@ -1,12 +1,16 @@
 package com.vampirenoob.ticketsystem.controller;
 
 import com.vampirenoob.ticketsystem.service.TicketService;
+import com.vampirenoob.ticketsystem.model.Ticket;
 import com.vampirenoob.ticketsystem.model.TicketPriority;
+import com.vampirenoob.ticketsystem.model.TicketStatus;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Web-Controller für die serverseitig gerenderten Thymeleaf-Ansichten.
@@ -52,4 +56,33 @@ public class TicketWebController {
         ticketService.createTicket(title, description, priority);
         return "redirect:/";
     }
+
+    /**
+ * Setzt ein Ticket auf den nächsten Status im Workflow
+ * (OFFEN -> IN_ARBEIT -> ERLEDIGT). Wird direkt aus der
+ * Übersichtstabelle heraus aufgerufen.
+ * POST /tickets/{id}/advance
+ */
+@PostMapping("/tickets/{id}/advance")
+public String advanceStatus(@PathVariable Long id) {
+    Ticket ticket = ticketService.getTicketById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Ticket mit ID " + id + " nicht gefunden"));
+    TicketStatus nextStatus = switch (ticket.getStatus()) {
+        case OFFEN -> TicketStatus.IN_ARBEIT;
+        case IN_ARBEIT -> TicketStatus.ERLEDIGT;
+        case ERLEDIGT -> TicketStatus.ERLEDIGT; // bleibt, kein weiterer Schritt
+    };
+    ticketService.updateStatus(id, nextStatus);
+    return "redirect:/";
+}
+
+/**
+ * Löscht ein Ticket direkt aus der Übersicht heraus.
+ * POST /tickets/{id}/delete
+ */
+@PostMapping("/tickets/{id}/delete")
+public String deleteTicket(@PathVariable Long id) {
+    ticketService.deleteTicket(id);
+    return "redirect:/";
+}
 }
