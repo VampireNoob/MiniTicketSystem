@@ -93,3 +93,10 @@ The REST API is available under `/api/tickets` and supports the standard operati
 - User accounts / authentication, so assignees are real users instead of free text
 - Sorting by column in the ticket table
 - Deployment to a cloud host
+
+## Contact
+
+Feel free to reach out via GitHub or Instagram:
+
+- GitHub: [@VampireNoob](https://github.com/VampireNoob)
+- Instagram: [@vampirenoob](https://instagram.com/vampirenoob)
