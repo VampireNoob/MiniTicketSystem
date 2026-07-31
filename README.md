@@ -88,6 +88,16 @@ MiniTicketSystem/
 
 The REST API is available under `/api/tickets` and supports the standard operations (`GET`, `POST`, `PATCH`, `DELETE`), including a `GET /api/tickets/next` endpoint that returns the highest-priority open ticket.
 
+## Cloud hosting — considered, deliberately not pursued
+
+Cloud hosting was evaluated but consciously left out of scope for this version:
+
+- Netlify only handles static sites and JavaScript functions — it can't run a Java/Spring Boot process at all, so it was never an option.
+- Render's free tier spins down after 15 minutes of inactivity, and its free PostgreSQL database expires after 30 days — not a lasting fit for a project meant to stay reliably viewable.
+- A separate managed PostgreSQL provider (e.g. Neon) would solve the database side, but would mean juggling yet another provider and connection setup for a project this small, on top of the ones already used for other portfolio pieces.
+
+Running locally (PostgreSQL + `./mvnw spring-boot:run`) turned out to be the more practical fit for this stage: no hosting limitations, no added infrastructure to maintain, and the project's purpose — demonstrating a clean Spring Boot layered architecture — is fully served by that. Anyone curious is welcome to clone the repo and run it themselves.
+
 ## Possible Next Steps
 
 - User accounts / authentication, so assignees are real users instead of free text
