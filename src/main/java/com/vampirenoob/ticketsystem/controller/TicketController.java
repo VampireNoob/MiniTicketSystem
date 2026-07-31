@@ -1,6 +1,7 @@
 package com.vampirenoob.ticketsystem.controller;
 
 import com.vampirenoob.ticketsystem.model.Ticket;
+import com.vampirenoob.ticketsystem.model.TicketPriority;
 import com.vampirenoob.ticketsystem.model.TicketStatus;
 import com.vampirenoob.ticketsystem.service.TicketService;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,8 @@ public class TicketController {
         Ticket ticket = ticketService.createTicket(
             request.title(),
             request.description(),
-            request.priority()
+            request.priority(),
+            request.assignee()
         );
         return ResponseEntity.ok(ticket);
     }
@@ -94,5 +96,5 @@ public class TicketController {
      * Java Records sind eine kompakte Möglichkeit, unveränderliche
      * Datenklassen ohne Boilerplate (Getter, equals, hashCode) zu definieren.
      */
-    public record CreateTicketRequest(String title, String description, com.vampirenoob.ticketsystem.model.TicketPriority priority) {}
+    public record CreateTicketRequest(String title, String description, TicketPriority priority, String assignee) {}
 }

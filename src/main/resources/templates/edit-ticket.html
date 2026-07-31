@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket bearbeiten</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+    <div class="page-header">
+        <div>
+            <h1>Ticket bearbeiten</h1>
+            <a th:href="@{/}">← Zurück zur Übersicht</a>
+        </div>
+        <button id="theme-toggle">Dark Mode</button>
+    </div>
+
+    <form class="ticket-form" th:action="@{/tickets/{id}/edit(id=${ticket.id})}" method="post">
+        <label>
+            Titel
+            <input type="text" name="title" th:value="${ticket.title}" required>
+        </label>
+
+        <label>
+            Beschreibung
+            <textarea name="description" rows="4" th:text="${ticket.description}"></textarea>
+        </label>
+
+        <label>
+            Zuständig für (optional)
+            <input type="text" name="assignee" th:value="${ticket.assignee}" placeholder="z. B. Max Mustermann">
+        </label>
+
+        <label>
+            Priorität
+            <select name="priority">
+                <option value="NIEDRIG" th:selected="${ticket.priority.name() == 'NIEDRIG'}">Niedrig</option>
+                <option value="MITTEL" th:selected="${ticket.priority.name() == 'MITTEL'}">Mittel</option>
+                <option value="HOCH" th:selected="${ticket.priority.name() == 'HOCH'}">Hoch</option>
+            </select>
+        </label>
+
+        <button type="submit" class="btn-primary">Änderungen speichern</button>
+    </form>
+
+    <script th:src="@{/js/theme.js}"></script>
+</body>
+</html>

@@ -36,6 +36,9 @@ public class Ticket {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column
+    private String assignee;
+
 /**
 * Wird von JPA benötigt (leerer Konstruktor).
 */
@@ -103,5 +106,13 @@ public class Ticket {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 }

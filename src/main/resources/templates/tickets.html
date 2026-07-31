@@ -15,12 +15,26 @@
         <button id="theme-toggle">Dark Mode</button>
     </div>
 
+    <div class="next-ticket-card" th:if="${nextTicket != null}">
+        <span class="next-ticket-label">Als nächstes bearbeiten</span>
+        <h2 th:text="${nextTicket.title}">Titel</h2>
+        <span class="priority-badge" th:text="${nextTicket.priority}">HOCH</span>
+    </div>
+
+    <div class="filter-tabs">
+        <a th:href="@{/}" th:class="${activeFilter == null} ? 'tab-active' : ''">Alle</a>
+        <a th:href="@{/(status='OFFEN')}" th:class="${activeFilter != null and activeFilter.name() == 'OFFEN'} ? 'tab-active' : ''">Offen</a>
+        <a th:href="@{/(status='IN_ARBEIT')}" th:class="${activeFilter != null and activeFilter.name() == 'IN_ARBEIT'} ? 'tab-active' : ''">In Arbeit</a>
+        <a th:href="@{/(status='ERLEDIGT')}" th:class="${activeFilter != null and activeFilter.name() == 'ERLEDIGT'} ? 'tab-active' : ''">Erledigt</a>
+    </div>
+
     <table>
         <thead>
         <tr>
             <th>ID</th>
             <th>Titel</th>
             <th>Priorität</th>
+            <th>Zuständig</th>
             <th>Status</th>
             <th>Aktionen</th>
         </tr>
@@ -30,8 +44,10 @@
             <td data-label="ID" th:text="${ticket.id}">1</td>
             <td data-label="Titel" th:text="${ticket.title}">Titel</td>
             <td data-label="Priorität"><span class="priority-badge" th:text="${ticket.priority}">HOCH</span></td>
+            <td data-label="Zuständig" th:text="${ticket.assignee != null and !ticket.assignee.isBlank()} ? ${ticket.assignee} : '–'">–</td>
             <td data-label="Status"><span class="status-badge" th:text="${ticket.status}">OFFEN</span></td>
             <td data-label="Aktionen">
+                <a th:href="@{/tickets/{id}/edit(id=${ticket.id})}" class="btn-edit-link">Bearbeiten</a>
                 <form th:if="${ticket.status.name() != 'ERLEDIGT'}"
                         th:action="@{/tickets/{id}/advance(id=${ticket.id})}"
                         method="post">

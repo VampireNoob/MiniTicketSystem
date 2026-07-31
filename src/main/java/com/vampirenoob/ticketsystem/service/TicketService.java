@@ -31,8 +31,9 @@ public class TicketService {
 /**
 * Erstellt ein neues Ticket mit Status OFFEN.
 */
-    public Ticket createTicket(String title, String description, TicketPriority priority) {
+    public Ticket createTicket(String title, String description, TicketPriority priority, String assignee) {
         Ticket ticket = new Ticket(title, description, priority);
+        ticket.setAssignee(assignee);
         return ticketRepository.save(ticket);
     }
 
@@ -70,6 +71,20 @@ public class TicketService {
         Ticket ticket = ticketRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Ticket mit ID " + id + " nicht gefunden"));
         ticket.setStatus(newStatus);
+        return ticketRepository.save(ticket);
+    }
+
+        /**
+     * Aktualisiert Titel, Beschreibung und Priorität eines Tickets.
+     * Der Status bleibt davon unberührt (dafür gibt es updateStatus).
+     */
+    public Ticket updateTicketDetails(Long id, String title, String description, TicketPriority priority, String assignee) {
+        Ticket ticket = ticketRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Ticket mit ID " + id + " nicht gefunden"));
+        ticket.setTitle(title);
+        ticket.setDescription(description);
+        ticket.setPriority(priority);
+        ticket.setAssignee(assignee);
         return ticketRepository.save(ticket);
     }
 

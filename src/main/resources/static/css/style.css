@@ -249,6 +249,79 @@ button:active {
     background-color: var(--accent-color);
 }
 
+.next-ticket-card {
+    background-color: var(--surface-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+}
+
+.next-ticket-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.next-ticket-card h2 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-tabs a {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.15s;
+}
+
+.filter-tabs a:hover {
+    background-color: var(--header-bg);
+    text-decoration: none;
+}
+
+.filter-tabs a.tab-active {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+}
+
+.btn-edit-link {
+    display: inline-block;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.15s;
+}
+
+.btn-edit-link:hover {
+    background-color: var(--header-bg);
+    text-decoration: none;
+}
+
 @media (max-width: 640px) {
     body {
         padding: 20px;
